@@ -1,7 +1,7 @@
 package com.work.user.service;
 
-import com.work.userservice.model.User;
-import com.work.userservice.repository.UserRepository;
+import com.work.user.model.User;
+import com.work.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class UserService {
     }
 
     public Optional<User> getUser(String id) {
-        return userRepository.findById(id);
+        return userRepository.findById(Long.valueOf(id));
     }
 
     public User updateUser(User user) {
@@ -29,6 +29,6 @@ public class UserService {
     }
 
     public void deleteUser(String id) {
-        userRepository.deleteById(id);
+        userRepository.deleteById(Long.valueOf(id));
     }
 }

@@ -1,7 +1,7 @@
 package com.work.user.controller;
 
-import com.work.userservice.model.User;
-import com.work.userservice.service.UserService;
+import com.work.user.model.User;
+import com.work.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
