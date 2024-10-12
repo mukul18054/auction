@@ -1,4 +1,4 @@
-package com.work.bidding_service;
+package com.work.bidding;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
