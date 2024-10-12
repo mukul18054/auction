@@ -1,7 +1,7 @@
 package com.work.bidding.service;
 
-import com.work.biddingservice.model.Bid;
-import com.work.biddingservice.repository.BidRepository;
+import com.work.bidding.model.Bid;
+import com.work.bidding.repository.BidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

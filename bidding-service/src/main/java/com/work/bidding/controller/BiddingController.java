@@ -1,8 +1,8 @@
 package com.work.bidding.controller;
 
-import com.work.biddingservice.dto.BidRequest;
-import com.work.biddingservice.model.Bid;
-import com.work.biddingservice.service.BiddingService;
+import com.work.bidding.dto.BidRequest;
+import com.work.bidding.model.Bid;
+import com.work.bidding.service.BiddingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
