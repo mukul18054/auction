@@ -4,17 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-//import jakarta.persistence.*;
+
+import jakarta.persistence.*;
 
 
-//@Entity
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "users")
 public class User {
     @Id
     private String id;
@@ -23,7 +21,4 @@ public class User {
     private String firstName;
     private String lastName;
     private String password; // In practice, this should be hashed
-
-
-    // Constructors, getters, and setters
 }
