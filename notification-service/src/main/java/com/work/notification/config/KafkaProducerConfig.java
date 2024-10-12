@@ -17,7 +17,7 @@ import java.util.Map;
 public class KafkaProducerConfig {
 
     @Autowired
-    private KafkaProducerProperties kafkaProducerProperties;
+    private KafkaProperties kafkaProperties;
 
     @Bean
     public ProducerFactory<String, String> producerFactory() {
@@ -27,14 +27,14 @@ public class KafkaProducerConfig {
     @Bean
     public Map<String, Object> producerConfigs() {
         Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProducerProperties.getBootstrap());
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getBootstrap());
         return props;
     }
 
     @Bean
     public KafkaTemplate<String, String> workUnitsKafkaTemplate() {
         KafkaTemplate<String, String> kafkaTemplate = new KafkaTemplate<>(producerFactory());
-        kafkaTemplate.setDefaultTopic(kafkaProducerProperties.getTopic());
+        kafkaTemplate.setDefaultTopic(kafkaProperties.getTopic());
         return kafkaTemplate;
     }
 

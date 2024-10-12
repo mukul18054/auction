@@ -9,9 +9,11 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-@ConfigurationProperties(prefix = "kafka.producer")
-public class KafkaProducerProperties {
+@ConfigurationProperties(prefix = "kafka")
+public class KafkaProperties {
 
     private String bootstrap;
     private String topic;
+    private String groupId;
+    private String autoOffsetReset;
 }
