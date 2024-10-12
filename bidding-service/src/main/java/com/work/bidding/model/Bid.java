@@ -1,9 +1,6 @@
 package com.work.bidding.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,6 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Document(collection = "bids")
 public class Bid {
     @Id
@@ -28,12 +26,12 @@ public class Bid {
 
     // Constructors, getters, and setters
 
-    public Bid(String productId, String userId, BigDecimal bidAmount) {
-        this.productId = productId;
-        this.userId = userId;
-        this.bidAmount = bidAmount;
-        this.bidTime = LocalDateTime.now();
-    }
+//    public Bid(String productId, String userId, BigDecimal bidAmount) {
+//        this.productId = productId;
+//        this.userId = userId;
+//        this.bidAmount = bidAmount;
+//        this.bidTime = LocalDateTime.now();
+//    }
 
     // Getters and setters
 }

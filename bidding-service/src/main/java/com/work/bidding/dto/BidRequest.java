@@ -1,10 +1,14 @@
 package com.work.bidding.dto;
 
+import com.mongodb.lang.Nullable;
+
 import java.math.BigDecimal;
 
 public class BidRequest {
     private String productId;
     private String userId;
+
+    @Nullable
     private BigDecimal bidAmount;
 
     // Constructors

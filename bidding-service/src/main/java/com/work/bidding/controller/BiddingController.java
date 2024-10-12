@@ -4,12 +4,16 @@ import com.work.bidding.dto.BidRequest;
 import com.work.bidding.model.Bid;
 import com.work.bidding.service.BiddingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
-@RequestMapping("/bids")
+@RequestMapping("/v1/auction")
 public class BiddingController {
     private final BiddingService biddingService;
 
@@ -18,9 +22,9 @@ public class BiddingController {
         this.biddingService = biddingService;
     }
 
-    @PostMapping
+    @PostMapping("/addBids")
     public ResponseEntity<Bid> placeBid(@RequestBody BidRequest bidRequest) {
-        Bid bid = biddingService.placeBid(bidRequest.getProductId(), bidRequest.getUserId(), bidRequest.getBidAmount());
+        Bid bid = biddingService.placeBid(bidRequest);
         return new ResponseEntity<>(bid, HttpStatus.CREATED);
     }
 
@@ -31,6 +35,54 @@ public class BiddingController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(winningBid, HttpStatus.OK);
+    }
+
+
+    // get bid
+    @GetMapping("/getBids/{userId}")
+    public ResponseEntity<List<Bid>> getBids(@PathVariable String userId) {
+        // Get all bids for the user
+        List<Bid> bids = biddingService.getBidsByUserId(userId);
+
+        // Check if any bids were found
+        if (bids.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        // Return the list of bids with OK status code
+        return new ResponseEntity<>(bids, HttpStatus.OK);
+    }
+
+    // delete bid
+    @DeleteMapping("/deleteBids")
+    public ResponseEntity<Void> deleteBid(@RequestBody BidRequest bidRequest) {
+        String bidId = biddingService.getBidId(bidRequest);
+        if (biddingService.getBid(bidId).isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        biddingService.deleteBid(bidId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    // update bid
+    @PutMapping("/updateBid")
+    public ResponseEntity<Bid> updateBid( @RequestBody BidRequest bidRequest) {
+        String bidId = biddingService.getBidId(bidRequest);
+        // Retrieve the existing bid based on bidId
+        Optional<Bid> existingBid = biddingService.getBid(bidId);
+
+        // Check if the bid exists
+        if (existingBid.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        // Update the bid amount
+        existingBid.get().setBidAmount(bidRequest.getBidAmount());
+
+        // Save the updated bid
+        biddingService.updateBid(existingBid.get());
+
+        return new ResponseEntity<>(existingBid.get(), HttpStatus.OK);
     }
 
 //    // Inner class for bid request
