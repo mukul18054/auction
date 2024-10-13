@@ -9,10 +9,10 @@ import com.google.gson.Gson;
 public class KafkaProducer {
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, WinnerDTO> kafkaTemplate;
 
     public void sendWinnerNotification(WinnerDTO winner) {
         String message = new Gson().toJson(winner);
-        kafkaTemplate.send("winner-topic", message);
+        kafkaTemplate.sendDefault("notification-topic",winner);
     }
 }

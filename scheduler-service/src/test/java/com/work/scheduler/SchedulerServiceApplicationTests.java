@@ -1,6 +1,5 @@
 package com.work.scheduler;
 
-import com.work.scheduler.SchedulerApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

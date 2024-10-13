@@ -11,7 +11,7 @@ public class BidWinnerScheduler {
     @Autowired
     private SchedulerService schedulerService;
 
-    @Scheduled(fixedRate = 30000) // Runs every minute
+    @Scheduled(fixedRate = 60000) // Runs every minute
     public void checkForExpiredBids() {
         schedulerService.processExpiredProducts();
     }
