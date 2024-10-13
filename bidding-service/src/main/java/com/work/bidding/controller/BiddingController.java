@@ -1,16 +1,16 @@
 package com.work.bidding.controller;
 
+import com.work.bidding.dto.BidDTO;
 import com.work.bidding.dto.BidRequest;
+import com.work.bidding.dto.BidResponse;
 import com.work.bidding.model.Bid;
 import com.work.bidding.service.BiddingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/auction/bidding")
@@ -74,12 +74,13 @@ public class BiddingController {
     }
     // get bids for a product id
     @GetMapping("/getBidsByProductId/{productId}")
-    public ResponseEntity<List<Bid>> getBidsByProductId(@PathVariable String productId) {
-        List<Bid> bids = biddingService.getBidsByProductId(productId);
+    public ResponseEntity<BidResponse> getBidsByProductId(@PathVariable String productId) {
+        List<BidDTO> bids = biddingService.getBidsByProductId(productId);
         if (bids.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new BidResponse(), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(bids, HttpStatus.OK);
+        BidResponse bidResponse = new BidResponse(bids);
+        return new ResponseEntity<>(bidResponse, HttpStatus.OK);
     }
 
 //    // Inner class for bid request

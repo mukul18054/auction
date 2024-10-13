@@ -9,7 +9,8 @@ import java.util.List;
 
 @Repository
 public interface BidRepository extends MongoRepository<Bid, String> {
-    List<Bid> findByProductIdOrderByBidAmountDesc(String productId);
+    //bids with the same bidAmount will be sorted based on their insertion order (first-come-first-served, or FCFS).
+    List<Bid> findByProductIdOrderByBidAmountDesc(String productId); //
 
 
     @Query(value = "{ userId: ?0 }")

@@ -1,14 +1,14 @@
 package com.work.bidding.service;
 
+import com.work.bidding.dto.BidDTO;
 import com.work.bidding.dto.BidRequest;
 import com.work.bidding.impl.BiddingServiceImpl;
 import com.work.bidding.model.Bid;
 import com.work.bidding.repository.BidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,7 +72,12 @@ public class BiddingService {
         return bidRepository.findById(bidId);
     }
 
-    public List<Bid> getBidsByProductId(String productId) {
-        return bidRepository.findByProductIdOrderByBidAmountDesc(productId);
+    public List<BidDTO> getBidsByProductId(String productId) {
+        List<Bid> bids = bidRepository.findByProductIdOrderByBidAmountDesc(productId);
+        List<BidDTO> bidDTOS = new ArrayList<>();
+        for (Bid bid : bids) {
+            bidDTOS.add(new BidDTO(bid));
+        }
+        return bidDTOS;
     }
 }
