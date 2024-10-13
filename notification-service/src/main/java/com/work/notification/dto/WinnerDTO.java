@@ -10,8 +10,8 @@ import lombok.*;
 @ToString
 public class WinnerDTO {
 
-    private Long emailId;
-    private Long productId;
+    private String emailId;
+    private String productId;
     private Double winningBidAmount;
 
 
