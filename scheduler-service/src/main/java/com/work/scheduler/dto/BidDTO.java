@@ -5,14 +5,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class BidDTO {
 
-    private Long bidId;
-    private Long productId;
-    private Long userId;
+    private String bidId;
+    private String productId;
+    private String userId;
     private Double bidAmount;
+    private LocalDateTime bidTime;
+
+
+
 }

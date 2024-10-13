@@ -1,6 +1,8 @@
 package com.work.scheduler.dto;
 
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +12,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class WinnerDTO {
+public class BidResponse {
 
-    private String emailId;
-    private String productId;
-    private Double winningBidAmount;
-
+    private List<BidDTO> bids;
 
 }
