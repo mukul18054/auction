@@ -14,9 +14,7 @@ import jakarta.persistence.*;
 @AllArgsConstructor
 @Entity
 public class User {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private String id;
     private String email;
     private String firstName;
     private String lastName;
