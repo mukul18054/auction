@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8084
 kafka:
   bootstrap: localhost:9092
   topic: notification_topic
