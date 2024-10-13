@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v1/auction")
+@RequestMapping("/v1/auction/bidding")
 public class BiddingController {
     private final BiddingService biddingService;
 
@@ -28,7 +28,7 @@ public class BiddingController {
         return new ResponseEntity<>(bid, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{productId}/winner")
+    @GetMapping("/winner/{productId}")
     public ResponseEntity<Bid> getWinningBid(@PathVariable String productId) {
         Bid winningBid = biddingService.getWinningBid(productId);
         if (winningBid == null) {
@@ -66,23 +66,20 @@ public class BiddingController {
 
     // update bid
     @PutMapping("/updateBid")
-    public ResponseEntity<Bid> updateBid( @RequestBody BidRequest bidRequest) {
-        String bidId = biddingService.getBidId(bidRequest);
-        // Retrieve the existing bid based on bidId
-        Optional<Bid> existingBid = biddingService.getBid(bidId);
+    public ResponseEntity<BidRequest> updateBid( @RequestBody BidRequest bidRequest) {
+        // Save the updated bid
+        biddingService.updateBid(bidRequest);
 
-        // Check if the bid exists
-        if (existingBid.isEmpty()) {
+        return new ResponseEntity<>(bidRequest, HttpStatus.OK);
+    }
+    // get bids for a product id
+    @GetMapping("/getBidsByProductId/{productId}")
+    public ResponseEntity<List<Bid>> getBidsByProductId(@PathVariable String productId) {
+        List<Bid> bids = biddingService.getBidsByProductId(productId);
+        if (bids.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-        // Update the bid amount
-        existingBid.get().setBidAmount(bidRequest.getBidAmount());
-
-        // Save the updated bid
-        biddingService.updateBid(existingBid.get());
-
-        return new ResponseEntity<>(existingBid.get(), HttpStatus.OK);
+        return new ResponseEntity<>(bids, HttpStatus.OK);
     }
 
 //    // Inner class for bid request

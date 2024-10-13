@@ -14,6 +14,7 @@ public class BiddingServiceImpl {
                 .bidAmount(bidRequest.getBidAmount())
                 .userId(bidRequest.getUserId())
                 .bidTime(LocalDateTime.now())
+                .bidStatus(Bid.BidStatus.PLACED)
                 .build();
     }
 

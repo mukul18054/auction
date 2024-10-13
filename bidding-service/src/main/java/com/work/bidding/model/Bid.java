@@ -17,12 +17,19 @@ import java.time.LocalDateTime;
 @Builder
 @Document(collection = "bids")
 public class Bid {
+
+    public enum BidStatus {
+        PLACED, WINNER, PAYMENT_COMPLETED, PAYMENT_FAILED
+    }
+
     @Id
     private String id;
     private String productId;
     private String userId;
     private BigDecimal bidAmount;
     private LocalDateTime bidTime;
+    private BidStatus bidStatus;
+
 
     // Constructors, getters, and setters
 

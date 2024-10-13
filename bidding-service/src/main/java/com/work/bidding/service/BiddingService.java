@@ -5,9 +5,10 @@ import com.work.bidding.impl.BiddingServiceImpl;
 import com.work.bidding.model.Bid;
 import com.work.bidding.repository.BidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,8 +42,26 @@ public class BiddingService {
         bidRepository.deleteById(bidId);
     }
 
-    public Bid updateBid(Bid bid) {
-        return bidRepository.save(bid);
+    public void updateBid(BidRequest bidRequest) {
+        // Retrieve the existing bid based on bidId
+        String bidId = getBidId(bidRequest);
+        Optional<Bid> existingBid = getBid(bidId);
+
+        // Check if the bid exists
+        if (existingBid.isEmpty()) {
+            // throw exception if bid does not exist
+//            throw new RuntimeException("Bid does not exist");
+            throw new IllegalArgumentException("Bid does not exist");
+        }
+
+        // check if bid amount is less than existing bid amount
+
+        if (bidRequest.getBidAmount().compareTo(existingBid.get().getBidAmount()) < 0) { // just check will his last instead of total max bid amount
+            throw new IllegalArgumentException("Bid amount is less than existing bid amount");
+        }
+        // Update the bid amount
+        existingBid.get().setBidAmount(bidRequest.getBidAmount());
+        bidRepository.save(existingBid.get());
     }
 
     public String getBidId(BidRequest bidRequest) {
@@ -51,5 +70,9 @@ public class BiddingService {
 
     public Optional<Bid> getBid(String bidId) {
         return bidRepository.findById(bidId);
+    }
+
+    public List<Bid> getBidsByProductId(String productId) {
+        return bidRepository.findByProductIdOrderByBidAmountDesc(productId);
     }
 }
