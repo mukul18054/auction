@@ -56,4 +56,10 @@ public class ProductController {
         List<ProductDTO> expiredProducts = productService.findActiveProductsBeforeNow();
         return new ResponseEntity<>(expiredProducts, HttpStatus.OK);
     }
+
+    @PutMapping("/updateProduct")
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+        productService.updateProduct(product);
+        return new ResponseEntity<>(product, HttpStatus.OK);
+    }
 }
