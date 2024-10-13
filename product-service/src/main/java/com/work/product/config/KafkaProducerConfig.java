@@ -1,4 +1,4 @@
-package com.work.notification.config;
+package com.work.product.config;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.Serializer;
@@ -12,6 +12,7 @@ import org.springframework.kafka.core.ProducerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 @Configuration
 public class KafkaProducerConfig {

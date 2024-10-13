@@ -1,4 +1,4 @@
-package com.work.notification.config;
+package com.work.product.config;
 
 import lombok.Getter;
 import lombok.Setter;
