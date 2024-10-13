@@ -25,17 +25,10 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests()
-                .requestMatchers("/ws/**", "/topic/**", "/app/**").permitAll()
                 .requestMatchers("/favicon.ico").permitAll()
-                .requestMatchers("/chat.html").permitAll() // Allow access to chat.html
                 .requestMatchers("/static/**").permitAll() // Allow access to all static resources
-                .requestMatchers("/users/**").permitAll()
-                .requestMatchers("/chat/**").permitAll()
-                .requestMatchers("/auth/login").permitAll()
-                .requestMatchers("/requirements/**").permitAll()
-                .requestMatchers("/api/communities").authenticated()
-                .requestMatchers("/api/communities/{communityId}").authenticated()
-                .anyRequest().authenticated()
+                .requestMatchers("/v1/**").permitAll()
+                .anyRequest().permitAll()
                 .and()
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
