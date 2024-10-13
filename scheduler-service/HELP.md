@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'com.work.bidding-service' is invalid and this project uses 'com.work.bidding_service' instead.
+* The original package name 'com.work.scheduler-service' is invalid and this project uses 'com.work.scheduler_service' instead.
 
 # Getting Started
 

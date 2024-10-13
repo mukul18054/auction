@@ -1,51 +1,19 @@
 package com.work.scheduler.dto;
 
 
-public class BidDTO {
+import java.util.List;
 
-    private Long bidId;
-    private Long productId;
-    private Long userId;
-    private Double bidAmount;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    // Constructor, Getters, Setters
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class BidResponse {
 
-    public BidDTO(Long bidId, Long productId, Long userId, Double bidAmount) {
-        this.bidId = bidId;
-        this.productId = productId;
-        this.userId = userId;
-        this.bidAmount = bidAmount;
-    }
+    private List<BidDTO> bids;
 
-    public Long getBidId() {
-        return bidId;
-    }
-
-    public void setBidId(Long bidId) {
-        this.bidId = bidId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Double getBidAmount() {
-        return bidAmount;
-    }
-
-    public void setBidAmount(Double bidAmount) {
-        this.bidAmount = bidAmount;
-    }
 }
