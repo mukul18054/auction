@@ -82,13 +82,4 @@ public class BiddingController {
         BidResponse bidResponse = new BidResponse(bids);
         return new ResponseEntity<>(bidResponse, HttpStatus.OK);
     }
-
-//    // Inner class for bid request
-//    private static class BidRequest {
-//        private String productId;
-//        private String userId;
-//        private BigDecimal bidAmount;
-//
-//        // Getters and setters
-//    }
 }

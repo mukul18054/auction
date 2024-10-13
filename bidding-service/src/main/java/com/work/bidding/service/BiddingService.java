@@ -75,9 +75,7 @@ public class BiddingService {
     public List<BidDTO> getBidsByProductId(String productId) {
         List<Bid> bids = bidRepository.findByProductIdOrderByBidAmountDesc(productId);
         List<BidDTO> bidDTOS = new ArrayList<>();
-        for (Bid bid : bids) {
-            bidDTOS.add(new BidDTO(bid));
-        }
+        bids.forEach(bid -> bidDTOS.add(new BidDTO(bid)));
         return bidDTOS;
     }
 }
